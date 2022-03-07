@@ -160,9 +160,37 @@ SELECT DISTINCT a, b FROM test;
 
 DROP TABLE IF EXISTS test;
 
-
 -- Order By
-
+SELECT Name FROM Country;
+--Order in ASCII order
+SELECT Name FROM Country ORDER BY Name;
+--Order in reverse ASCII order
+SELECT Name FROM Country ORDER BY Name DESC;
+--Order in ASCII order
+SELECT Name FROM Country ORDER BY Name ASC;
+-- Order by multiple columns
+SELECT Name, Continent FROM Country ORDER BY Continent, Name;
+--Order by some columns DESC and then others ASC
+SELECT Name, Continent, Region FROM Country ORDER BY Continent DESC, Region, Name;
 
 
 -- Case
+DROP TABLE IF EXISTS booltest;
+CREATE TABLE booltest (a INTEGER, b INTEGER);
+INSERT INTO booltest VALUES (1, 0);
+SELECT * FROM booltest;
+-- Conditional: CASE WHEN a THEN 'true' ELSE 'false' END
+SELECT
+    CASE WHEN a THEN 'true' ELSE 'false' END as boolA,
+    CASE WHEN b THEN 'true' ELSE 'false' END as boolB
+    FROM booltest
+;
+
+SELECT
+  CASE a WHEN 1 THEN 'true' ELSE 'false' END AS boolA,
+  CASE b WHEN 1 THEN 'true' ELSE 'false' END AS boolB 
+  FROM booltest
+;
+
+DROP TABLE IF EXISTS booltest;
+
