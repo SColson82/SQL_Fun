@@ -1,0 +1,168 @@
+-- Create Table, part between the parenthesis are the schema)
+CREATE TABLE test(
+    a INTEGER,
+    b TEXT
+);
+    
+INSERT INTO test VALUES (1, 'a');
+INSERT INTO test VALUES (2, 'b');
+INSERT INTO test VALUES (3, 'c');
+SELECT * FROM test;
+
+--02 Drop Table 
+CREATE TABLE test(a TEXT, b TEXT);
+INSERT INTO test VALUES ('one', 'two');
+SELECT * FROM test;
+DROP TABLE test;
+DROP TABLE IF EXISTS test;
+
+--03 Insert Into
+CREATE TABLE test (a INTEGER, b TEXT, c TEXT);
+INSERT INTO test VALUES (1, 'This', 'Right here!');
+--Specify which columns to add data too
+INSERT INTO test (b, c) VALUES ('That', 'Over there!');
+--Add row with no data
+INSERT INTO test DEFAULT VALUES;
+--Insert data from another table (concatenate rather than merge)
+INSERT INTO test ( a, b, c ) SELECT id, name, description from item;
+SELECT * FROM test;
+
+--Delete From -- Destructive, cannot be undone.
+SELECT * FROM test;
+DELETE FROM test WHERE a=3;
+DELETE FROM test WHERE a=1;
+
+-- NULL -- Special state: not a value but rather lack of value rather
+SELECT * FROM test;
+SELECT * FROM test WHERE a IS NULL;
+SELECT * FROM test WHERE a IS NOT NULL;
+INSERT INTO test (a,b,c) VALUES (0, NULL, '');
+SELECT * FROM test WHERE b IS NULL;
+SELECT * FROM test WHERE b = '';
+SELECT * FROM test WHERE c = '';
+SELECT * FROM test WHERE c IS NULL;
+DROP TABLE IF EXISTS test;
+
+--Add constraint to not allow null values in columns a and b. 
+CREATE TABLE test (
+  a INTEGER NOT NULL,
+  b TEXT NOT NULL,
+  c TEXT
+);
+
+INSERT INTO test VALUES ( 1, 'this', 'that' );
+SELECT * FROM test;
+
+INSERT INTO test ( b, c ) VALUES ( 'one', 'two' );
+INSERT INTO test ( a, c ) VALUES ( 1, 'two' );
+INSERT INTO test ( a, b ) VALUES ( 1, 'two' );
+DROP TABLE IF EXISTS test;
+
+--Constraints
+DROP TABLE IF EXISTS test;
+CREATE TABLE test ( a TEXT, b TEXT, c TEXT );
+INSERT INTO test ( a, b ) VALUES ( 'one', 'two' );
+SELECT * FROM test;
+--Disallow NULL values in c column
+CREATE TABLE test ( a TEXT, b TEXT, c TEXT NOT NULL );
+-- Create default table to be inserted with NULL values. 
+CREATE TABLE test ( a TEXT, b TEXT, c TEXT DEFAULT 'panda' );
+INSERT INTO test ( a, b ) VALUES ( 'one', 'two' );
+SELECT * FROM test;
+--Ensure that every value in a column is unique
+DROP TABLE IF EXISTS test;
+CREATE TABLE test ( a TEXT UNIQUE, b TEXT, c TEXT DEFAULT 'panda' );
+INSERT INTO test ( a, b ) VALUES ( 'one', 'two' );
+INSERT INTO test ( a, b ) VALUES ( 'one', 'two' );
+SELECT * FROM test;
+---This one will work because we changed the value in column a
+INSERT INTO test ( a, b ) VALUES ( 'one', 'two' );
+INSERT INTO test ( a, b ) VALUES ( 'uno', 'two' );
+SELECT * FROM test;
+--Note that the NULL state may be accepted in some systems under the unique constraint. You may need to add UNIQUE NOT NULL constraints. 
+CREATE TABLE test ( a TEXT UNIQUE NOT NULL, b TEXT, c TEXT DEFAULT 'panda' );
+
+-- Alter Table--- Will need to track and update code before using Alter Table 
+DROP TABLE IF EXISTS test;
+CREATE TABLE test ( a TEXT, b TEXT, c TEXT );
+INSERT INTO test VALUES ( 'one', 'two', 'three');
+INSERT INTO test VALUES ( 'two', 'three', 'four');
+INSERT INTO test VALUES ( 'three', 'four', 'five');
+SELECT * FROM test;
+
+ALTER TABLE test ADD d TEXT;
+ALTER TABLE test ADD e TEXT DEFAULT 'panda';
+
+DROP TABLE IF EXISTS test;
+
+--ID -- Creates Integer Primary Key that will automatically create a unique numerical value. This may vary across systems. 
+CREATE TABLE test (
+  id INTEGER PRIMARY KEY,
+  a INTEGER,
+  b TEXT
+);
+--ID column will autopopulate
+INSERT INTO test (a, b) VALUES ( 10, 'a' );
+INSERT INTO test (a, b) VALUES ( 11, 'b' );
+INSERT INTO test (a, b) VALUES ( 12, 'c' );
+SELECT * FROM test;
+DROP TABLE IF EXISTS test;
+
+--Where, Like, and In
+SELECT * FROM Country;
+--- Find name, continent, population where population is under 100000 listed in descending order from Country table. 
+SELECT Name, Continent, Population FROM Country
+    WHERE Population < 100000 ORDER BY Population DESC;
+--- Add Null states to the list. 
+SELECT Name, Continent, Population FROM Country
+    WHERE Population < 100000 OR Population IS NULL ORDER BY Population DESC;
+---- Filter to only results under 100000 AND on the Continent of Oceania in Descending Order. 
+SELECT Name, Continent, Population FROM Country 
+    WHERE Population < 100000 AND Continent = 'Oceania' ORDER BY Population DESC;
+--- Use a wildcard... Anything that has island in the name. 
+SELECT Name, Continent, Population FROM Country 
+    WHERE Name LIKE '%island%' ORDER BY Name;
+-- Query the names that end in island only
+SELECT Name, Continent, Population FROM Country 
+    WHERE Name LIKE '%island' ORDER BY Name;
+-- Query the names that start with island only
+SELECT Name, Continent, Population FROM Country 
+    WHERE Name LIKE 'island%' ORDER BY Name;
+-- Query the names that have a as the second letter
+SELECT Name, Continent, Population FROM Country 
+    WHERE Name LIKE '_a%' ORDER BY Name;
+--- Find specific information inside of a specific column
+SELECT Name, Continent, Population FROM Country 
+ WHERE Continent IN ( 'Europe', 'Asia' ) ORDER BY Name;
+
+-- Select Distinct
+SELECT Continent FROM Country;
+SELECT DISTINCT Continent FROM Country;
+--Using the SELECT DISTINCT statement, you will get only unique results. 
+
+DROP TABLE IF EXISTS test;
+CREATE TABLE test ( a int, b int );
+INSERT INTO test VALUES ( 1, 1 );
+INSERT INTO test VALUES ( 2, 1 );
+INSERT INTO test VALUES ( 3, 1 );
+INSERT INTO test VALUES ( 4, 1 );
+INSERT INTO test VALUES ( 5, 1 );
+INSERT INTO test VALUES ( 1, 2 );
+INSERT INTO test VALUES ( 1, 2 );
+INSERT INTO test VALUES ( 1, 2 );
+INSERT INTO test VALUES ( 1, 2 );
+INSERT INTO test VALUES ( 1, 2 );
+SELECT * FROM test;
+
+SELECT DISTINCT a FROM test;
+SELECT DISTINCT b FROM test;
+SELECT DISTINCT a, b FROM test;
+
+DROP TABLE IF EXISTS test;
+
+
+-- Order By
+
+
+
+-- Case
