@@ -1,0 +1,50 @@
+--STRING FUNCTIONS
+--This can be different across different systems. Consult documentation. 
+
+-- If you need to use a single quote within a string you use two(2) single quotes
+-- EX: SELECT 'Here''s a single quote mark.';
+
+--Concatenation Operator
+--EX: SELECT 'This' || '&' || 'that';
+
+--Finding the Length of a string
+SELECT LENGTH('string');
+SELECT Name, LENGTH(Name) AS Len FROM City ORDER BY Len DESC;
+
+-- Selecting Part of a String
+-- album.db
+-- (Substring function--> first arguement is column or string and second is the counting position in the string, 3rd arguement specifies the number of positions we want. 
+SELECT SUBSTR('this string', 6);
+SELECT SUBSTR('this string', 6, 3);
+
+SELECT released,
+    --parse the year
+    SUBSTR(released, 1, 4) AS year,
+    --parse month
+    SUBSTR(released, 6, 2) AS month,
+    --parse day
+    SUBSTR(released, 9, 2) AS day
+  FROM album
+  ORDER BY released
+;
+
+-- Removing Spaces using TRIM
+-- strip all space
+SELECT TRIM('   string   ');
+--strip space from left
+SELECT LTRIM('   string   ');
+--strip space from right
+SELECT RTRIM('   string   ');
+---strip other characters ex: '.'
+SELECT TRIM('...string...', '.');
+
+-- 05 Folding Case: UPPER/LOWER --- Makes comparing data more effective
+-- world.db
+
+SELECT 'StRiNg' = 'string';   --- Not the same, will receive False (0)
+SELECT LOWER('StRiNg') = LOWER('string'); ---convert both to all lower case. 
+SELECT UPPER('StRiNg') = UPPER('string'); ---concert both to all upper case
+SELECT UPPER(Name) FROM City ORDER BY Name; --- ONLY converts ASCII characters to Upper case
+SELECT LOWER(Name) FROM City ORDER BY Name; -- converts all characters to lower case
+
+
