@@ -1,0 +1,18 @@
+-- 02 DATE/TIME functions
+-- :memory:
+
+--- Standard SQL format 2018-03-28 15:32:47 --does not set type
+-- Not standardized across systems. 
+--UTC Coordinated Universal Time
+
+--SQLite functions. 
+--Uses strings. 
+SELECT DATETIME('now');   -- 2022-03-08 23:46:12 Current UTS time
+SELECT DATE('now');  --2022-03-08
+SELECT TIME('now');  --23:47:51
+SELECT DATETIME('now', '+1 day');  --2022-03-09 23:48:00
+SELECT DATETIME('now', '+3 days');  --2022-03-11 23:48:11
+SELECT DATETIME('now', '-1 month');  --2022-02-08 23:48:31
+SELECT DATETIME('now', '+1 year');  --2023-03-08 23:48:48
+SELECT DATETIME('now', '+3 hours', '+27 minutes', '-1 day', '+3 years');  --2025-03-08 03:16:02
+

@@ -1,5 +1,6 @@
 --- Types for integer and real: Integer (precision), Decimal (precision, scale), Money (precision, scale) 
 -- Real Types: Real(precision), Float(precision)-- sacrifice accuracy for scale. Values may be large or small but are not precise. 
+-- Numeric types are NOT standardized across all systems so check your documentation before trusting the results. 
 
 -- What type is that Value?
 
