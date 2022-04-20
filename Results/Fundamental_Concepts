@@ -32,7 +32,7 @@ SELECT * FROM test;
 DELETE FROM test WHERE a=3;
 DELETE FROM test WHERE a=1;
 
--- NULL -- Special state: not a value but rather lack of value rather
+-- NULL -- Special state: not a value but rather lack of value
 SELECT * FROM test;
 SELECT * FROM test WHERE a IS NULL;
 SELECT * FROM test WHERE a IS NOT NULL;
@@ -95,7 +95,8 @@ ALTER TABLE test ADD e TEXT DEFAULT 'panda';
 
 DROP TABLE IF EXISTS test;
 
---ID -- Creates Integer Primary Key that will automatically create a unique numerical value. This may vary across systems. 
+--ID -- Creates Integer Primary Key that will automatically create a 
+-- unique numerical value. This may vary across systems. 
 CREATE TABLE test (
   id INTEGER PRIMARY KEY,
   a INTEGER,
@@ -110,13 +111,15 @@ DROP TABLE IF EXISTS test;
 
 --Where, Like, and In
 SELECT * FROM Country;
---- Find name, continent, population where population is under 100000 listed in descending order from Country table. 
+--- Find name, continent, population where population is under 100000 
+-- listed in descending order from Country table. 
 SELECT Name, Continent, Population FROM Country
     WHERE Population < 100000 ORDER BY Population DESC;
 --- Add Null states to the list. 
 SELECT Name, Continent, Population FROM Country
     WHERE Population < 100000 OR Population IS NULL ORDER BY Population DESC;
----- Filter to only results under 100000 AND on the Continent of Oceania in Descending Order. 
+---- Filter to only results under 100000 AND on the Continent of Oceania in 
+-- Descending Order. 
 SELECT Name, Continent, Population FROM Country 
     WHERE Population < 100000 AND Continent = 'Oceania' ORDER BY Population DESC;
 --- Use a wildcard... Anything that has island in the name. 

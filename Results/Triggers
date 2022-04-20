@@ -1,4 +1,5 @@
--- 01 update triggers --operations that are automatically performed when a specified database event occurs. Introduced in 2003. Varies significantly from system to system. 
+-- 01 update triggers --operations that are automatically performed when a specified database 
+-- event occurs. Introduced in 2003. Varies significantly from system to system. 
 -- test.db
 
 CREATE TABLE widgetCustomer ( id INTEGER PRIMARY KEY, name TEXT, last_order_id INT );
@@ -11,7 +12,8 @@ INSERT INTO widgetCustomer (name) VALUES ('Fred');
 SELECT * FROM widgetCustomer;
 
 
---SQLite syntax -- This will begin after an insert event in WidgetSale which will cause the widgetCustomer table to be updated automatically when the widgetSale table is updated. 
+--SQLite syntax -- This will begin after an insert event in WidgetSale which will cause the widgetCustomer 
+-- table to be updated automatically when the widgetSale table is updated. 
 CREATE TRIGGER newWidgetSale AFTER INSERT ON widgetSale
     BEGIN
         UPDATE widgetCustomer SET last_order_id = NEW.id WHERE widgetCustomer.id = NEW.customer_id;
@@ -37,8 +39,10 @@ INSERT INTO widgetSale (item_id, customer_id, quan, price, reconciled) VALUES (1
 INSERT INTO widgetSale (item_id, customer_id, quan, price, reconciled) VALUES (2, 2, 3, 1495, 1);
 INSERT INTO widgetSale (item_id, customer_id, quan, price, reconciled) VALUES (3, 1, 1, 2995, 0);
 SELECT * FROM widgetSale;
--- This trigger will prevent updates on rows that are already reconciled. You can't do this in MYSQL so check your documentation. 
---Rollback statement within the trigger will simply rollback the statement if it does not comply with the trigger. 
+-- This trigger will prevent updates on rows that are already reconciled. You can't do this in MYSQL so 
+-- check your documentation. 
+--Rollback statement within the trigger will simply rollback the statement if it does not comply with 
+-- the trigger. 
 CREATE TRIGGER updateWidgetSale BEFORE UPDATE ON widgetSale
     BEGIN
         SELECT RAISE(ROLLBACK, 'cannot update table "widgetSale"') FROM widgetSale
@@ -59,15 +63,18 @@ DROP TABLE IF EXISTS widgetSale;
 DROP TABLE IF EXISTS widgetCustomer;
 
 CREATE TABLE widgetCustomer ( id integer primary key, name TEXT, last_order_id INT, stamp TEXT );
-CREATE TABLE widgetSale ( id integer primary key, item_id INT, customer_id INTEGER, quan INT, price INT, stamp TEXT );
-CREATE TABLE widgetLog ( id integer primary key, stamp TEXT, event TEXT, username TEXT, tablename TEXT, table_id INT);
+CREATE TABLE widgetSale ( id integer primary key, item_id INT, customer_id INTEGER, quan INT, price INT, 
+    stamp TEXT );
+CREATE TABLE widgetLog ( id integer primary key, stamp TEXT, event TEXT, username TEXT, tablename TEXT, 
+    table_id INT);
 
 INSERT INTO widgetCustomer (name) VALUES ('Bob');
 INSERT INTO widgetCustomer (name) VALUES ('Sally');
 INSERT INTO widgetCustomer (name) VALUES ('Fred');
 SELECT * FROM widgetCustomer;
 
---- This will create a timestamp on the widgetSale and widgetCustomer tables when they are updated and insert the event data into another table called widgetLog. 
+--- This will create a timestamp on the widgetSale and widgetCustomer tables when they are updated and 
+-- insert the event data into another table called widgetLog. 
 CREATE TRIGGER stampSale AFTER INSERT ON widgetSale
     BEGIN
         UPDATE widgetSale SET stamp = DATETIME('now') WHERE id = NEW.id;

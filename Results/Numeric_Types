@@ -1,26 +1,35 @@
---- Types for integer and real: Integer (precision), Decimal (precision, scale), Money (precision, scale) 
--- Real Types: Real(precision), Float(precision)-- sacrifice accuracy for scale. Values may be large or small but are not precise. 
--- Numeric types are NOT standardized across all systems so check your documentation before trusting the results. 
+--- Types for integer and real: Integer (precision), 
+--Decimal (precision, scale), Money (precision, scale) 
+-- Real Types: Real(precision), Float(precision)
+-- sacrifice accuracy for scale. Values may be large or 
+-- small but are not precise. 
+-- Numeric types are NOT standardized across 
+-- all systems so check your documentation before trusting the results. 
 
 -- What type is that Value?
 
 SELECT TYPEOF( 1 + 1 ); --integer
 SELECT TYPEOF( 1 + 1.0 ); --real --integer 1 converted to real
 SELECT TYPEOF('panda'); --text
-SELECT TYPEOF('panda' + 'koala'); --integer -- does not concatonate like Python does. Check your system. 
+SELECT TYPEOF('panda' + 'koala'); --integer 
+-- does not concatonate like Python does. Check your system. 
 
 -- 03 INTEGER division
 
-SELECT 1 / 2; --- integer division always results in an integer. Answer will be 0
+SELECT 1 / 2; --- integer division always results in an integer. 
+-- Answer will be 0
 SELECT 1.0 / 2;  --result is real: 0.5
 SELECT CAST(1 AS REAL) / 2; -- same as above
 SELECT 17 / 5; -- should be 3.4 but this produces 3
-SELECT 17 / 5, 17 % 5; --% is Modulo operator. This will provide the answer 3 2/5
+SELECT 17 / 5, 17 % 5; --% is Modulo operator. This will 
+-- provide the answer 3 2/5
 
 
 -- Rounding Numbers. 
 
 SELECT 2.55555; -- real number 
 SELECT ROUND(2.55555); -- rounds to 3
-SELECT ROUND(2.55555, 3); -- 2nd parameter is the number of digits that you will round to: answer = 2.556
-SELECT ROUND(2.55555, 0); -- 0 is the default number of digits for the round function: answer = 0
+SELECT ROUND(2.55555, 3); -- 2nd parameter is the number 
+-- of digits that you will round to: answer = 2.556
+SELECT ROUND(2.55555, 0); -- 0 is the default number of 
+-- digits for the round function: answer = 0

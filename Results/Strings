@@ -13,7 +13,10 @@ SELECT Name, LENGTH(Name) AS Len FROM City ORDER BY Len DESC;
 
 -- Selecting Part of a String
 -- album.db
--- (Substring function--> first arguement is column or string and second is the counting position in the string, 3rd arguement specifies the number of positions we want. 
+-- (Substring function--> first arguement is column or 
+-- string and second is the counting position in the 
+-- string, 3rd arguement specifies the number of positions 
+-- we want. 
 SELECT SUBSTR('this string', 6);
 SELECT SUBSTR('this string', 6, 3);
 
@@ -38,7 +41,8 @@ SELECT RTRIM('   string   ');
 ---strip other characters ex: '.'
 SELECT TRIM('...string...', '.');
 
--- 05 Folding Case: UPPER/LOWER --- Makes comparing data more effective
+-- 05 Folding Case: UPPER/LOWER --- Makes comparing 
+-- data more effective
 -- world.db
 
 SELECT 'StRiNg' = 'string';   --- Not the same, will receive False (0)

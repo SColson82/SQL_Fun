@@ -1,4 +1,5 @@
--- 02 transactions --group of operations that are handled as one unit of work. Improves performance. 
+-- 02 transactions --group of operations that are handled as one unit 
+-- of work. Improves performance. 
 -- test.db
 
 CREATE TABLE widgetInventory (
@@ -22,7 +23,8 @@ SELECT * FROM widgetInventory;
 -- At this time widgetSales is empty
 SELECT * FROM widgetSales;
 
---This will insert the sell of 5 items into widgetSales and at the same time deduct the same 5 items from widgetInventory
+--This will insert the sell of 5 items into widgetSales and at the same time 
+-- deduct the same 5 items from widgetInventory
 BEGIN TRANSACTION;
 INSERT INTO widgetSales ( inv_id, quan, price ) VALUES ( 1, 5, 500 );
 UPDATE widgetInventory SET onhand = ( onhand - 5 ) WHERE id = 1;
@@ -47,7 +49,8 @@ CREATE TABLE test ( id INTEGER PRIMARY KEY, data TEXT );
 -- put this before the 1,000 INSERT statements
 BEGIN TRANSACTION;
 
--- copy / paste 1,000 of these ... without transaction this took 2.024 seconds. With transaction this took 0.036 seconds. 
+-- copy / paste 1,000 of these ... without transaction this took 2.024 seconds. With 
+-- transaction this took 0.036 seconds. 
 INSERT INTO test ( data ) VALUES ( 'this is a good sized line of text.' );
 INSERT INTO test ( data ) VALUES ( 'this is a good sized line of text.' );
 INSERT INTO test ( data ) VALUES ( 'this is a good sized line of text.' );
